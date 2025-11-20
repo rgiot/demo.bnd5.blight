@@ -1,0 +1,192 @@
+{% set MAIN_INKA=5 %}
+{% set MAIN_INKB=14 %}
+
+{% set SCREEN_MEMORY_FILES=["C4.4100", "C5.4000", "C6.4000", "C7.4000"]%}
+
+{% macro convert_background_mode1(scr) %}
+- tgt: {{scr}}
+  dep: {{scr | replace(".scr", ".png")}}
+  cmd: 
+   - img2cpc $< --mode 1 --pens 26,0,{{MAIN_INKA}},{{MAIN_INKB}} scr --r1=32 --r6=32 -o $@
+   - compress -i $@ -o $@.zx0 --cruncher zx0
+   - compress -i $@ -o $@.lzsa2 --cruncher lzsa2
+   - compress -i $@ -o $@.lz49 --cruncher lz49
+{% endmacro %}
+
+{#
+{% macro convert_logo_mode1(spr) %}
+- tgt: {{spr}}
+  dep: {{spr | replace(".spr", ".png")}}
+  cmd: 
+   - img2cpc $< --mode 1 --pens 26,0,{{MAIN_INKA}},{{MAIN_INKB}} sprite -o $@
+{% endmacro %}
+#}
+
+#- tgt: logo.spr
+#  dep: assets/logo.png
+#  cmd: img2cpc $< --mode 1 --pens 26,0,{{MAIN_INKA}},{{MAIN_INKB}} sprite -o $@
+
+{# - tgt: logo.spr logo.pal
+  dep: assets/logoBND_krusty_01.png 
+  cmd: img2cpc $< --mode 1 --pens BRIGHT_MAGENTA,0,WHITE,{{MAIN_INKB}} sprite -o $@ --palette logo.pal #}
+
+
+- tgt: logo.spr logo.pal
+  dep: assets/benediction_shadow.png
+  cmd: img2cpc $< --mode 1 --pens BRIGHT_WHITE,0,WHITE,{{MAIN_INKB}} sprite -o $@ --palette logo.pal
+
+
+{% set ALL_BACKGROUNDS=["CPC_A01.scr", "CPC_A02.scr", "CPC_A03.scr", "CPC_A04.scr"] %}
+{% set ALL_LOGOS=["logo_a01.spr", "logo_a02.spr","logo_a03.spr","logo_a04.spr"] %}
+
+# Generate the data for the falling sprite.
+# the pixels themselves as well as the reversed mask (0 where to draw the sprite, 3 where to not draw)
+{# - tgt: falling_sprite_odd.{spr,msk,asm} falling_sprite_even.{spr,msk,asm}
+  dep: falling_sprite.png
+  cmd: 
+   - >
+      img2cpc $< 
+      --mode 1
+      --pens 26,0,{{MAIN_INKA}},{{MAIN_INKB}} 
+      sprite
+      --r1=32
+      -o falling_sprite_odd.spr
+      -m falling_sprite_odd.msk
+      --code falling_sprite_odd.asm
+      --mask-ink 16 --replacement-ink 26  
+   - >
+      img2cpc $< 
+      --mode 1
+      --pens 26,0,{{MAIN_INKB}},{{MAIN_INKA}} 
+      sprite
+      --r1=32
+      -o falling_sprite_even.spr
+      -m falling_sprite_even.msk
+      --code falling_sprite_even.asm 
+      --mask-ink 16 --replacement-ink 26   #}
+
+- tgt: falling_sprite_odd.{spr,msk,asm} falling_sprite_even.{spr,msk,asm}
+  dep: assets/assassin.png
+  cmd: 
+   - >
+      img2cpc $< 
+      --mode 1
+      --pens 26,0,PASTEL_BLUE,MAUVE
+      sprite
+      --r1=32
+      -o falling_sprite_odd.spr
+      -m falling_sprite_odd.msk
+      --code falling_sprite_odd.asm
+      --mask-ink 16 --replacement-ink 26  
+   - >
+      img2cpc $< 
+      --mode 1
+      --pens 26,0,MAUVE,PASTEL_BLUE 
+      sprite
+      --r1=32
+      -o falling_sprite_even.spr
+      -m falling_sprite_even.msk
+      --code falling_sprite_even.asm 
+      --mask-ink 16 --replacement-ink 26  
+
+
+
+- dep: music/secret_rooms.aks
+  tgt: music/secret_rooms.asm
+  cmd:  SongToAkg  --exportPlayerConfig $< $@
+
+- tgt: generique.scr generique.pal
+  dep: assets/generique.png
+  cmd: img2cpc $< --mode 1 --pen0 0 --pen1 26 --pen2 5 --pen3 14 scr -o generique.scr
+
+- tgt: BLIGHT.BAS
+  dep: loader.asm generique.scr
+  cmd: basm $< -o BLIGHT.BAS --basic
+
+
+- tgt: testloader
+  dep: loader.sna
+  cmd: emu --snapshot loader.sna run
+
+- tgt: {% for zoom in range(0,11) %}{% for shift in range(0,4) %}ball_{{zoom}}_{{shift}}.asm {% endfor %}{% endfor %}
+  dep: balls_spritesheet_x01.png
+  cmd: 
+{%for zoom in range(0,11) %}{% for shift in range(0,4) %}
+   - img2cpc $< --columnstart {{zoom*32}} --columnskept 32 --linestart {{shift*28}} --lineskept 28 --mode 1 --pens 26,0,{{MAIN_INKA}},{{MAIN_INKB}} sprite --r1=32 -o ball_{{zoom}}_{{shift}}.spr -m ball_{{zoom}}_{{shift}}.msk --code ball_{{zoom}}_{{shift}}.asm --mask-ink 17 --replacement-ink 26 
+{%- endfor %}{% endfor %}
+
+{% for background in ALL_BACKGROUNDS %}
+{{convert_background_mode1(background)}}
+{% endfor %}
+
+{#
+{% for logo in ALL_LOGOS %}
+{{convert_logo_mode1(logo)}}
+{% endfor %}
+#}
+
+- tgt: unlimited_spiral.asm
+  dep: spiral.py
+  cmd: extern python $<
+  
+- tgt: test.sna {{SCREEN_MEMORY_FILES | join(" ")}}
+  dep: >
+    {{ALL_BACKGROUNDS | join(" ")}}
+    logo.spr
+    ../macros.asm
+    music/secret_rooms_akg.asm
+    depth_extra_page.asm
+    unlimited_spiral.asm
+    depth_music.asm depth_spiral.asm 
+    infinite_sprite.asm depth_infinite_sprite_data.asm 
+    depth_crunched_background.asm depth_logo_data.asm
+    depth_logo_splits.asm depth_equalizers.asm depth_demo_main.asm depth_logo_rasters.asm depth_logo_code.asm
+    depth_transitions.asm big_sprite.asm
+     falling_sprite_odd.asm ball_0_0.asm
+  cmd: basm --snapshot -o $@ test_depth.asm --lst depth.lst
+
+
+- tgt: link.sna BLIGHT.001
+  dep: {{SCREEN_MEMORY_FILES | join(" ")}} depth_linker.asm
+  cmd: basm --snapshot -o $@ depth_linker.asm --lst linker.lst --override
+
+- tgt: BLIGHT.DSK
+  dep: BLIGHT.BAS BLIGHT.001
+  cmd: 
+    - impdsk -dsk $@ -format -force
+    - impdsk -dsk $@ -put BLIGHT.BAS
+    - impdsk -dsk $@ -put BLIGHT.001 -hide
+
+- tgt: clean
+  phony: true
+  cmd: -rm {{ALL_BACKGROUNDS | join(" ")}} *.msk *.spr ball_*.asm *.lz49 *.zx0 *.lzsa2 falling_sprite_even.asm falling_sprite_odd.asm
+
+- tgt: distclean
+  dep: clean
+  phony: true
+  cmd: -rm test.sna BLIGHT.DSK
+
+
+- tgt: test
+  dep: test.sna
+  cmd: emu --snapshot test.sna run
+
+- tgt: testlinked
+  dep: link.sna
+  cmd: emu --snapshot $< run
+
+
+- tgt: launch
+  dep: BLIGHT.DSK
+  phony: true
+  cmd: emu --drivea BLIGHT.DSK --auto-run-file=BLIGHT.BAS --disable-rom unidos run
+
+
+
+- tgt: test_music.sna
+  dep: test_music.asm
+  cmd: basm  $< -o $@  --snapshot
+
+- tgt: test_music
+  dep: test_music.sna
+  cmd: emu --snapshot test_music.sna run
