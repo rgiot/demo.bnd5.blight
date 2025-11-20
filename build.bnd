@@ -133,7 +133,7 @@
   dep: >
     {{ALL_BACKGROUNDS | join(" ")}}
     logo.spr
-    ../macros.asm
+    macros.asm
     music/secret_rooms_akg.asm
     depth_extra_page.asm
     unlimited_spiral.asm

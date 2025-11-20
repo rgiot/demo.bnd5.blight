@@ -1,6 +1,6 @@
 Context: test_depth.asm
-0000                                    1 	include once "../macros.asm"
-Context: ../macros.asm
+0000                                    1 	include once "macros.asm"
+Context: macros.asm
 MACRO      WRITE_CRTC                   1 macro WRITE_CRTC reg, val
                                         2 		ld bc, 0xbc00 + {reg} : out (c), c
                                         3 		ld bc, 0xbd00 + {val} : out (c), c
@@ -22138,8 +22138,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_0_1.asm
 4CFC 14CFC                              1  ; Linear sprite display routine. HL contains screen address
 4CFC 14CFC ball_0_1_asm                 2 ball_0_1_asm
-4CFC 14CFC  01 88 80                    3 	LD BC, 0x8088
-4CFF 14CFF  11 77 CC                    4 	LD DE, 0xcc77
+4CFC 14CFC  11 77 CC                    3 	LD DE, 0xcc77
+4CFF 14CFF  01 88 80                    4 	LD BC, 0x8088
 4D02 14D02                              5  ; > Handle line 0
 4D02 14D02                              6  ;   HL already contains the destination address
 4D02 14D02                              7  ; Nothing shown here
@@ -24122,8 +24122,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_0_3.asm
 52B7 152B7                              1  ; Linear sprite display routine. HL contains screen address
 52B7 152B7 ball_0_3_asm                 2 ball_0_3_asm
-52B7 152B7  11 10 33                    3 	LD DE, 0x3310
-52BA 152BA  01 EE 11                    4 	LD BC, 0x11ee
+52B7 152B7  01 EE 11                    3 	LD BC, 0x11ee
+52BA 152BA  11 10 33                    4 	LD DE, 0x3310
 52BD 152BD                              5  ; > Handle line 0
 52BD 152BD                              6  ;   HL already contains the destination address
 52BD 152BD                              7  ; Nothing shown here
@@ -25110,8 +25110,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_1_0.asm
 558B 1558B                              1  ; Linear sprite display routine. HL contains screen address
 558B 1558B ball_1_0_asm                 2 ball_1_0_asm
-558B 1558B  01 CC 88                    3 	LD BC, 0x88cc
-558E 1558E  11 33 11                    4 	LD DE, 0x1133
+558B 1558B  11 33 11                    3 	LD DE, 0x1133
+558E 1558E  01 CC 88                    4 	LD BC, 0x88cc
 5591 15591                              5  ; > Handle line 0
 5591 15591                              6  ;   HL already contains the destination address
 5591 15591                              7  ; Nothing shown here
@@ -26918,8 +26918,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_1_2.asm
 5A98 15A98                              1  ; Linear sprite display routine. HL contains screen address
 5A98 15A98 ball_1_2_asm                 2 ball_1_2_asm
-5A98 15A98  11 77 10                    3 	LD DE, 0x1077
-5A9B 15A9B  01 EE 80                    4 	LD BC, 0x80ee
+5A98 15A98  01 EE 80                    3 	LD BC, 0x80ee
+5A9B 15A9B  11 77 10                    4 	LD DE, 0x1077
 5A9E 15A9E                              5  ; > Handle line 0
 5A9E 15A9E                              6  ;   HL already contains the destination address
 5A9E 15A9E                              7  ; Nothing shown here
@@ -30367,8 +30367,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_2_2.asm
 63F3 163F3                              1  ; Linear sprite display routine. HL contains screen address
 63F3 163F3 ball_2_2_asm                 2 ball_2_2_asm
-63F3 163F3  11 70 E0                    3 	LD DE, 0xe070
-63F6 163F6  01 88 11                    4 	LD BC, 0x1188
+63F3 163F3  01 88 11                    3 	LD BC, 0x1188
+63F6 163F6  11 70 E0                    4 	LD DE, 0xe070
 63F9 163F9                              5  ; > Handle line 0
 63F9 163F9                              6  ;   HL already contains the destination address
 63F9 163F9                              7  ; Nothing shown here
@@ -31997,8 +31997,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_3_0.asm
 6831 16831                              1  ; Linear sprite display routine. HL contains screen address
 6831 16831 ball_3_0_asm                 2 ball_3_0_asm
-6831 16831  11 80 77                    3 	LD DE, 0x7780
-6834 16834  01 EE 88                    4 	LD BC, 0x88ee
+6831 16831  01 EE 88                    3 	LD BC, 0x88ee
+6834 16834  11 80 77                    4 	LD DE, 0x7780
 6837 16837                              5  ; > Handle line 0
 6837 16837                              6  ;   HL already contains the destination address
 6837 16837                              7  ; Nothing shown here
@@ -33490,8 +33490,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_3_2.asm
 6BF0 16BF0                              1  ; Linear sprite display routine. HL contains screen address
 6BF0 16BF0 ball_3_2_asm                 2 ball_3_2_asm
-6BF0 16BF0  11 EE 88                    3 	LD DE, 0x88ee
-6BF3 16BF3  01 CC 33                    4 	LD BC, 0x33cc
+6BF0 16BF0  01 CC 33                    3 	LD BC, 0x33cc
+6BF3 16BF3  11 EE 88                    4 	LD DE, 0x88ee
 6BF6 16BF6                              5  ; > Handle line 0
 6BF6 16BF6                              6  ;   HL already contains the destination address
 6BF6 16BF6                              7  ; Nothing shown here
@@ -34279,8 +34279,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_3_3.asm
 6E05 16E05                              1  ; Linear sprite display routine. HL contains screen address
 6E05 16E05 ball_3_3_asm                 2 ball_3_3_asm
-6E05 16E05  11 10 CC                    3 	LD DE, 0xcc10
-6E08 16E08  01 EE 11                    4 	LD BC, 0x11ee
+6E05 16E05  01 EE 11                    3 	LD BC, 0x11ee
+6E08 16E08  11 10 CC                    4 	LD DE, 0xcc10
 6E0B 16E0B                              5  ; > Handle line 0
 6E0B 16E0B                              6  ;   HL already contains the destination address
 6E0B 16E0B                              7  ; Nothing shown here
@@ -38462,8 +38462,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_5_1.asm
 7812 17812                              1  ; Linear sprite display routine. HL contains screen address
 7812 17812 ball_5_1_asm                 2 ball_5_1_asm
-7812 17812  01 EE CC                    3 	LD BC, 0xccee
-7815 17815  11 11 10                    4 	LD DE, 0x1011
+7812 17812  11 11 10                    3 	LD DE, 0x1011
+7815 17815  01 EE CC                    4 	LD BC, 0xccee
 7818 17818                              5  ; > Handle line 0
 7818 17818                              6  ;   HL already contains the destination address
 7818 17818                              7  ; Nothing shown here
@@ -39107,8 +39107,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_5_2.asm
 798B 1798B                              1  ; Linear sprite display routine. HL contains screen address
 798B 1798B ball_5_2_asm                 2 ball_5_2_asm
-798B 1798B  11 77 10                    3 	LD DE, 0x1077
-798E 1798E  01 EE 80                    4 	LD BC, 0x80ee
+798B 1798B  01 EE 80                    3 	LD BC, 0x80ee
+798E 1798E  11 77 10                    4 	LD DE, 0x1077
 7991 17991                              5  ; > Handle line 0
 7991 17991                              6  ;   HL already contains the destination address
 7991 17991                              7  ; Nothing shown here
@@ -39740,8 +39740,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_5_3.asm
 7AF3 17AF3                              1  ; Linear sprite display routine. HL contains screen address
 7AF3 17AF3 ball_5_3_asm                 2 ball_5_3_asm
-7AF3 17AF3  11 33 C0                    3 	LD DE, 0xc033
-7AF6 17AF6  01 88 77                    4 	LD BC, 0x7788
+7AF3 17AF3  01 88 77                    3 	LD BC, 0x7788
+7AF6 17AF6  11 33 C0                    4 	LD DE, 0xc033
 7AF9 17AF9                              5  ; > Handle line 0
 7AF9 17AF9                              6  ;   HL already contains the destination address
 7AF9 17AF9                              7  ; Nothing shown here
@@ -40384,8 +40384,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_6_0.asm
 7C6A 17C6A                              1  ; Linear sprite display routine. HL contains screen address
 7C6A 17C6A ball_6_0_asm                 2 ball_6_0_asm
-7C6A 17C6A  11 C0 30                    3 	LD DE, 0x30c0
-7C6D 17C6D  01 CC 33                    4 	LD BC, 0x33cc
+7C6A 17C6A  01 CC 33                    3 	LD BC, 0x33cc
+7C6D 17C6D  11 C0 30                    4 	LD DE, 0x30c0
 7C70 17C70                              5  ; > Handle line 0
 7C70 17C70                              6  ;   HL already contains the destination address
 7C70 17C70                              7  ; Nothing shown here
@@ -40967,8 +40967,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_6_1.asm
 7DA1 17DA1                              1  ; Linear sprite display routine. HL contains screen address
 7DA1 17DA1 ball_6_1_asm                 2 ball_6_1_asm
-7DA1 17DA1  11 10 80                    3 	LD DE, 0x8010
-7DA4 17DA4  01 EE 11                    4 	LD BC, 0x11ee
+7DA1 17DA1  01 EE 11                    3 	LD BC, 0x11ee
+7DA4 17DA4  11 10 80                    4 	LD DE, 0x8010
 7DA7 17DA7                              5  ; > Handle line 0
 7DA7 17DA7                              6  ;   HL already contains the destination address
 7DA7 17DA7                              7  ; Nothing shown here
@@ -41557,8 +41557,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_6_2.asm
 7EE0 17EE0                              1  ; Linear sprite display routine. HL contains screen address
 7EE0 17EE0 ball_6_2_asm                 2 ball_6_2_asm
-7EE0 17EE0  11 88 33                    3 	LD DE, 0x3388
-7EE3 17EE3  01 CC C0                    4 	LD BC, 0xc0cc
+7EE0 17EE0  01 CC C0                    3 	LD BC, 0xc0cc
+7EE3 17EE3  11 88 33                    4 	LD DE, 0x3388
 7EE6 17EE6                              5  ; > Handle line 0
 7EE6 17EE6                              6  ;   HL already contains the destination address
 7EE6 17EE6                              7  ; Nothing shown here
@@ -43223,8 +43223,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_7_1.asm
 8238 18238                              1  ; Linear sprite display routine. HL contains screen address
 8238 18238 ball_7_1_asm                 2 ball_7_1_asm
-8238 18238  11 77 33                    3 	LD DE, 0x3377
-823B 1823B  01 88 80                    4 	LD BC, 0x8088
+8238 18238  01 88 80                    3 	LD BC, 0x8088
+823B 1823B  11 77 33                    4 	LD DE, 0x3377
 823E 1823E                              5  ; > Handle line 0
 823E 1823E                              6  ;   HL already contains the destination address
 823E 1823E                              7  ; Nothing shown here
@@ -45323,8 +45323,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_8_1.asm
 8632 18632                              1  ; Linear sprite display routine. HL contains screen address
 8632 18632 ball_8_1_asm                 2 ball_8_1_asm
-8632 18632  01 88 77                    3 	LD BC, 0x7788
-8635 18635  1E 80                       4 	LD E, 0x80
+8632 18632  1E 80                       3 	LD E, 0x80
+8634 18634  01 88 77                    4 	LD BC, 0x7788
 8637 18637                              5  ; > Handle line 0
 8637 18637                              6  ;   HL already contains the destination address
 8637 18637                              7  ; Nothing shown here
@@ -46852,8 +46852,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_9_0.asm
 88FC 188FC                              1  ; Linear sprite display routine. HL contains screen address
 88FC 188FC ball_9_0_asm                 2 ball_9_0_asm
-88FC 188FC  01 CC 88                    3 	LD BC, 0x88cc
-88FF 188FF  11 33 11                    4 	LD DE, 0x1133
+88FC 188FC  11 33 11                    3 	LD DE, 0x1133
+88FF 188FF  01 CC 88                    4 	LD BC, 0x88cc
 8902 18902                              5  ; > Handle line 0
 8902 18902                              6  ;   HL already contains the destination address
 8902 18902                              7  ; Nothing shown here
@@ -47771,8 +47771,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_9_2.asm
 8A6E 18A6E                              1  ; Linear sprite display routine. HL contains screen address
 8A6E 18A6E ball_9_2_asm                 2 ball_9_2_asm
-8A6E 18A6E  11 77 10                    3 	LD DE, 0x1077
-8A71 18A71  01 EE 80                    4 	LD BC, 0x80ee
+8A6E 18A6E  01 EE 80                    3 	LD BC, 0x80ee
+8A71 18A71  11 77 10                    4 	LD DE, 0x1077
 8A74 18A74                              5  ; > Handle line 0
 8A74 18A74                              6  ;   HL already contains the destination address
 8A74 18A74                              7  ; Nothing shown here
@@ -49109,8 +49109,8 @@ Context: depth_infinite_sprite_data.asm:23:2 > MACRO include_one_ball_file:
 Context: ball_10_1.asm
 8C6D 18C6D                              1  ; Linear sprite display routine. HL contains screen address
 8C6D 18C6D ball_10_1_asm                2 ball_10_1_asm
-8C6D 18C6D  1E 10                       3 	LD E, 0x10
-8C6F 18C6F  01 EE 11                    4 	LD BC, 0x11ee
+8C6D 18C6D  01 EE 11                    3 	LD BC, 0x11ee
+8C70 18C70  1E 10                       4 	LD E, 0x10
 8C72 18C72                              5  ; > Handle line 0
 8C72 18C72                              6  ;   HL already contains the destination address
 8C72 18C72                              7  ; Nothing shown here
@@ -53422,7 +53422,7 @@ C4CD 1C4CD                             49 ;	WRITE_CRTC(2, 32+10)
 C4CD 1C4CD                             51 	;WRITE_CRTC(6, 32)
 C4CD 1C4CD                             52 	;WRITE_CRTC(1, 32)
 C4CD 1C4CD                             53 	WRITE_CRTC(3, 0x8e)
-Context: ../macros.asm:1:2 > MACRO WRITE_CRTC:
+Context: macros.asm:1:2 > MACRO WRITE_CRTC:
 C4D0 1C4D0  01 03 BC ED 49              2 		ld bc, 0xbc00 + 3 : out (c), c
 C4D5 1C4D5  01 8E BD ED 49              3 		ld bc, 0xbd00 + 0x8e : out (c), c
 Context: depth_demo_main.asm
@@ -53446,7 +53446,7 @@ C513 1C513  06 F5                      75 	ld b, 0xf5
 C515 1C515 .frame_loop_no_vsync        76 .frame_loop_no_vsync
 C518 1C518  ED 78 1F 30 FB             77 	 in a, (c) : rra : jr nc, .frame_loop_no_vsync
 C51A 1C51A                             79 	WRITE_CRTC(1, 32)
-Context: ../macros.asm:1:2 > MACRO WRITE_CRTC:
+Context: macros.asm:1:2 > MACRO WRITE_CRTC:
 C51D 1C51D  01 01 BC ED 49              2 		ld bc, 0xbc00 + 1 : out (c), c
 C522 1C522  01 20 BD ED 49              3 		ld bc, 0xbd00 + 32 : out (c), c
 Context: depth_demo_main.asm
@@ -53470,7 +53470,7 @@ C55F 1C55F  CD 1F C0                  106 		call split_border_in_pixels_zone
 C562 1C562  CD 5A 0F                  109 		call c2_play_music
 C565 1C565                            111 	;di
 C565 1C565                            112 		BORDER &55
-Context: ../macros.asm:7:2 > MACRO BORDER:
+Context: macros.asm:7:2 > MACRO BORDER:
 C56D 1C56D  01 10 7F ED 49 01 10 7F     5 			ld bc, 0x7f10:out(c), c : ld bc, 0x7f10 : out (c), c
             ED 49                         
 Context: depth_demo_main.asm
@@ -53478,7 +53478,7 @@ C570 ????? .routine_called            113 		call infinite_sprite_draw : .routine
 C570 1C572  CD C6 C8                  113 		call infinite_sprite_draw : .routine_called equ $-2
 C572 1C572                            114 		;call infinite_dots_draw
 C572 1C572                            115 		BORDER &4b
-Context: ../macros.asm:7:2 > MACRO BORDER:
+Context: macros.asm:7:2 > MACRO BORDER:
 C57A 1C57A  01 10 7F ED 49 01 10 7F     5 			ld bc, 0x7f10:out(c), c : ld bc, 0x7f10 : out (c), c
             ED 49                         
 Context: depth_demo_main.asm
@@ -53488,7 +53488,7 @@ C57E 1C57E  B7                        119 		or a
 C57F 1C57F  C4 57 C9                  120 		call nz, depth_draw_big_sprite
 C582 1C582  CD A2 D6                  122 		call c2_logo_handle
 C585 1C585                            123 		BORDER &54
-Context: ../macros.asm:7:2 > MACRO BORDER:
+Context: macros.asm:7:2 > MACRO BORDER:
 C58D 1C58D  01 10 7F ED 49 01 10 7F     5 			ld bc, 0x7f10:out(c), c : ld bc, 0x7f10 : out (c), c
             ED 49                         
 Context: depth_demo_main.asm
@@ -54308,7 +54308,7 @@ C93A 1C93A                            114 ; Input:
 C93A 1C93A                            115 ; HL = adress of the sprite routine
 C93A 1C93A infinite_sprite_copy_sprite_routine 116 infinite_sprite_copy_sprite_routine
 C93A 1C93A                            117 	BORDER &5a
-Context: ../macros.asm:7:2 > MACRO BORDER:
+Context: macros.asm:7:2 > MACRO BORDER:
 C942 1C942  01 10 7F ED 49 01 10 7F     5 			ld bc, 0x7f10:out(c), c : ld bc, 0x7f10 : out (c), c
             ED 49                         
 Context: infinite_sprite.asm
@@ -54316,7 +54316,7 @@ C944 1C944  01 E0 02                  118 	ld bc, INFINITE_SPRITE_MAX_SIZE_ROUTI
 C947 1C947  11 00 DD                  119 	ld de, buffer_for_infinite_sprite_routine
 C94A 1C94A  ED B0                     120 	ldir
 C94C 1C94C                            121 	BORDER &4c
-Context: ../macros.asm:7:2 > MACRO BORDER:
+Context: macros.asm:7:2 > MACRO BORDER:
 C954 1C954  01 10 7F ED 49 01 10 7F     5 			ld bc, 0x7f10:out(c), c : ld bc, 0x7f10 : out (c), c
             ED 49                         
 Context: infinite_sprite.asm
@@ -54359,8 +54359,8 @@ C978 1C978                             39 	include "falling_sprite_odd.asm"
 Context: falling_sprite_odd.asm
 C978 1C978                              1  ; Linear sprite display routine. HL contains screen address
 C978 1C978 falling_sprite_odd_asm       2 falling_sprite_odd_asm
-C978 1C978  01 EE 10                    3 	LD BC, 0x10ee
-C97B 1C97B  11 11 80                    4 	LD DE, 0x8011
+C978 1C978  11 11 80                    3 	LD DE, 0x8011
+C97B 1C97B  01 EE 10                    4 	LD BC, 0x10ee
 C97E 1C97E                              5  ; > Handle line 0
 C97E 1C97E                              6  ;   HL already contains the destination address
 C97E 1C97E                              7  ; Nothing shown here
@@ -56836,8 +56836,8 @@ D009 1D009                             40 	include "falling_sprite_even.asm"
 Context: falling_sprite_even.asm
 D009 1D009                              1  ; Linear sprite display routine. HL contains screen address
 D009 1D009 falling_sprite_even_asm      2 falling_sprite_even_asm
-D009 1D009  11 11 80                    3 	LD DE, 0x8011
-D00C 1D00C  01 EE 10                    4 	LD BC, 0x10ee
+D009 1D009  01 EE 10                    3 	LD BC, 0x10ee
+D00C 1D00C  11 11 80                    4 	LD DE, 0x8011
 D00F 1D00F                              5  ; > Handle line 0
 D00F 1D00F                              6  ;   HL already contains the destination address
 D00F 1D00F                              7  ; Nothing shown here
@@ -59322,13 +59322,13 @@ D6A3 ????? .activated                  10 .activated equ $-1
 D6A5 1D6A5  B7 C8                      11 	or a  : ret z
 D6AB 1D6AB  3A E6 D6 FE 40 CA E0 D6    14 	ld a, (logo_data.logo_line) : cp LOGO_HEIGHT*2 : jp z, .finished
 D6AE 1D6AE                             16 	BORDER &59
-Context: ../macros.asm:7:2 > MACRO BORDER:
+Context: macros.asm:7:2 > MACRO BORDER:
 D6B6 1D6B6  01 10 7F ED 49 01 10 7F     5 			ld bc, 0x7f10:out(c), c : ld bc, 0x7f10 : out (c), c
             ED 49                         
 Context: depth_logo_code.asm
 D6B8 1D6B8  CD 48 B4                   17 	call c2_logo_copy_line_in_buffer
 D6BB 1D6BB                             19 	BORDER &40
-Context: ../macros.asm:7:2 > MACRO BORDER:
+Context: macros.asm:7:2 > MACRO BORDER:
 D6C3 1D6C3  01 10 7F ED 49 01 10 7F     5 			ld bc, 0x7f10:out(c), c : ld bc, 0x7f10 : out (c), c
             ED 49                         
 Context: depth_logo_code.asm

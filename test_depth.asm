@@ -1,4 +1,4 @@
-	include once "../macros.asm"
+	include once "macros.asm"
 	include once "inner://ga.asm"
 
 	DEBUG_MODE = false
